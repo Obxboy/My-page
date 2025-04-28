@@ -1,14 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mac Retro Landing</title>
+  <title>Blog obx_boy</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Retro "pixel-art" style */
     body {
       image-rendering: pixelated;
+    }
+    .gallery-container {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .gallery-slide {
+      display: none;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .gallery-slide.active {
+      display: flex;
+    }
+    .gallery-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      padding: 1rem;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .gallery-nav.prev {
+      left: 0;
+    }
+    .gallery-nav.next {
+      right: 0;
+    }
+    .gallery-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .gallery-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ccc;
+      cursor: pointer;
+    }
+    .gallery-indicator.active {
+      background: #000;
+    }
+    .transition-all {
+      transition: all 0.5s ease;
     }
   </style>
 </head>
@@ -18,70 +67,104 @@
   <header class="bg-gray-200 border-b-4 border-black py-4">
     <nav class="flex flex-wrap justify-around items-center">
       <div class="w-8 h-8 bg-black"></div>
-      <a href="#" class="text-black hover:underline">Projects</a>
-      <a href="#" class="text-black hover:underline">Blog</a>
-      <a href="#" class="text-black hover:underline">Learn</a>
-      <a href="#" class="text-black hover:underline">Clone me</a>
-      <a href="#" class="text-black hover:underline">Find me</a>
+      <a href="#blog" class="text-black hover:underline">Blog</a>
+      <a href="#galeria" class="text-black hover:underline">Galeria</a>
+      <a href="#projekty" class="text-black hover:underline">Projekty</a>
+      <a href="#kontakt" class="text-black hover:underline">Kontakt</a>
+      <a href="#właściciel" class="text-black hover:underline">Dla Właściciela</a>
     </nav>
   </header>
 
   <!-- Hero Section -->
   <section class="py-12 text-center border-b-4 border-black">
-    <h1 class="text-5xl font-bold mb-4">Hello.<br>I'm Mac.</h1>
+    <h1 class="text-5xl font-bold mb-4">Witaj!<br>Jestem obx_boy</h1>
     <p class="text-lg mb-8">
-      I'm a free retro Webflow template made by 
-      <span class="underline">Mackenzie Child</span>.
+      To mój osobisty blog — moje myśli, publikacje i projekty.
     </p>
-    <button class="border-2 border-black py-2 px-6 hover:bg-gray-100 mb-6">
-      Clone me on Webflow
-    </button>
-    <div class="flex justify-center">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Old_computer_icon.png" 
-           alt="Retro Mac" 
-           class="w-48 h-48 object-contain" />
+  </section>
+
+  <!-- Blog Section -->
+  <section id="blog" class="bg-gray-100 py-12 border-b-4 border-black">
+    <h2 class="text-4xl font-bold text-center mb-8">Mój Blog</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+
+      <!-- Blog Card 1 -->
+      <div class="border-4 border-black shadow-lg shadow-black p-4">
+        <h3 class="text-lg font-bold mb-2">Pierwszy wpis</h3>
+        <p>Moje przemyślenia na początek blogowania.</p>
+      </div>
+
+      <!-- Blog Card 2 -->
+      <div class="border-4 border-black shadow-lg shadow-black p-4">
+        <h3 class="text-lg font-bold mb-2">Publikacje</h3>
+        <p>Lista moich artykułów i projektów.</p>
+      </div>
+
+      <!-- Blog Card 3 -->
+      <div class="border-4 border-black shadow-lg shadow-black p-4">
+        <h3 class="text-lg font-bold mb-2">Inspiracje</h3>
+        <p>Co mnie motywuje do działania każdego dnia.</p>
+      </div>
+
     </div>
   </section>
 
-  <!-- Quick Links -->
-  <section class="bg-gray-100 py-8 border-b-4 border-black">
-    <h2 class="text-2xl font-bold text-left px-8 mb-4 flex items-center gap-2">
-      <span class="w-4 h-4 bg-black rounded-full"></span> Quick links
-    </h2>
-    <div class="flex flex-wrap justify-center gap-4 px-4">
-      <a href="#" class="flex items-center border-2 border-black px-4 py-2 hover:bg-gray-200">
-        Blog <span class="ml-2">→</span>
-      </a>
-      <a href="#" class="flex items-center border-2 border-black px-4 py-2 hover:bg-gray-200">
-        Projects <span class="ml-2">→</span>
-      </a>
-      <a href="#" class="flex items-center border-2 border-black px-4 py-2 hover:bg-gray-200">
-        About <span class="ml-2">→</span>
-      </a>
-      <a href="#" class="flex items-center border-2 border-black px-4 py-2 hover:bg-gray-200">
-        Contact <span class="ml-2">→</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section class="bg-white py-12 border-b-4 border-black">
-    <h2 class="text-4xl font-bold text-center mb-8">Projects</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto px-4">
+  <!-- Galeria -->
+  <section id="galeria" class="bg-white py-12 border-b-4 border-black">
+    <h2 class="text-4xl font-bold text-center mb-8">Galeria</h2>
+    <div class="gallery-container">
+      <button class="gallery-nav prev"><i class="fas fa-chevron-left"></i></button>
       
+      <div class="gallery-slide active transition-all">
+        <img src="https://placehold.co/300x200/000000/FFFFFF?text=Zdjęcie+1" alt="Zdjęcie 1" class="border-4 border-black">
+        <img src="https://placehold.co/300x200/000000/FFFFFF?text=Zdjęcie+2" alt="Zdjęcie 2" class="border-4 border-black">
+        <img src="https://placehold.co/300x200/000000/FFFFFF?text=Zdjęcie+3" alt="Zdjęcie 3" class="border-4 border-black">
+      </div>
+      
+      <div class="gallery-slide transition-all">
+        <img src="https://placehold.co/300x200/000000/FFFFFF?text=Zdjęcie+4" alt="Zdjęcie 4" class="border-4 border-black">
+        <img src="https://placehold.co/300x200/000000/FFFFFF?text=Zdjęcie+5" alt="Zdjęcie 5" class="border-4 border-black">
+        <img src="https://placehold.co/300x200/000000/FFFFFF?text=Zdjęcie+6" alt="Zdjęcie 6" class="border-4 border-black">
+      </div>
+      
+      <div class="gallery-slide transition-all">
+        <img src="https://placehold.co/300x200/000000/FFFFFF?text=Zdjęcie+7" alt="Zdjęcie 7" class="border-4 border-black">
+        <img src="https://placehold.co/300x200/000000/FFFFFF?text=Zdjęcie+8" alt="Zdjęcie 8" class="border-4 border-black">
+        <img src="https://placehold.co/300x200/000000/FFFFFF?text=Zdjęcie+9" alt="Zdjęcie 9" class="border-4 border-black">
+      </div>
+      
+      <div class="gallery-slide transition-all">
+        <img src="https://placehold.co/300x200/000000/FFFFFF?text=Zdjęcie+10" alt="Zdjęcie 10" class="border-4 border-black">
+        <img src="https://placehold.co/300x200/000000/FFFFFF?text=Zdjęcie+11" alt="Zdjęcie 11" class="border-4 border-black">
+        <img src="https://placehold.co/300x200/000000/FFFFFF?text=Zdjęcie+12" alt="Zdjęcie 12" class="border-4 border-black">
+      </div>
+      
+      <button class="gallery-nav next"><i class="fas fa-chevron-right"></i></button>
+      
+      <div class="gallery-indicators">
+        <div class="gallery-indicator active" data-slide="0"></div>
+        <div class="gallery-indicator" data-slide="1"></div>
+        <div class="gallery-indicator" data-slide="2"></div>
+        <div class="gallery-indicator" data-slide="3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projekty -->
+  <section id="projekty" class="bg-white py-12 border-b-4 border-black">
+    <h2 class="text-4xl font-bold text-center mb-8">Moje Projekty</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto px-4">
+
       <!-- Project Card 1 -->
       <div class="border-4 border-black shadow-lg shadow-black">
         <div class="bg-gray-300 flex items-center justify-center h-48">
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Windows_3.1x_My_Computer_icon.svg/1024px-Windows_3.1x_My_Computer_icon.svg.png" 
-               alt="Old Project" 
+               alt="Projekt" 
                class="h-20" />
         </div>
         <div class="p-4">
-          <h3 class="text-xl font-bold mb-2">Possimus</h3>
-          <p class="text-gray-800 mb-4">Officia sit numquam fugiat sint molestiae id. Est modi est at debitis dolorem.</p>
-          <button class="border-2 border-black py-2 px-4 hover:bg-gray-100">
-            View project
-          </button>
+          <h3 class="text-xl font-bold mb-2">Projekt 1</h3>
+          <p class="text-gray-800 mb-4">Opis mojego pierwszego projektu.</p>
         </div>
       </div>
 
@@ -89,67 +172,115 @@
       <div class="border-4 border-black shadow-lg shadow-black">
         <div class="bg-gray-300 flex items-center justify-center h-48">
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Windows_3.1x_Program_Manager_icon.svg/1024px-Windows_3.1x_Program_Manager_icon.svg.png" 
-               alt="Retro Project" 
+               alt="Projekt Retro" 
                class="h-20" />
         </div>
         <div class="p-4">
-          <h3 class="text-xl font-bold mb-2">Dolorum Ullam Totam</h3>
-          <p class="text-gray-800 mb-4">Consequatur consequatur et quisquam sit velit. Distinctio sint omnis.</p>
-          <button class="border-2 border-black py-2 px-4 hover:bg-gray-100">
-            View project
-          </button>
+          <h3 class="text-xl font-bold mb-2">Projekt 2</h3>
+          <p class="text-gray-800 mb-4">Opis drugiego projektu nad którym pracowałem.</p>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- Blog Section -->
-  <section class="bg-gray-100 py-12">
-    <div class="flex justify-between items-center max-w-6xl mx-auto mb-8 px-4">
-      <h2 class="text-4xl font-bold">From the blog</h2>
-      <a href="#" class="underline text-black">View all blog posts</a>
+  <!-- Kontakt -->
+  <section id="kontakt" class="bg-gray-100 py-12">
+    <h2 class="text-4xl font-bold text-center mb-8">Kontakt</h2>
+    <div class="flex flex-col items-center gap-4 text-center">
+      <a href="https://t.me/G_O_L_U_B_E_C" target="_blank" class="text-black hover:underline">Telegram</a>
+      <a href="https://www.instagram.com/obx_boy" target="_blank" class="text-black hover:underline">Instagram</a>
+      <a href="https://pin.it/6ZUsHUPj8" target="_blank" class="text-black hover:underline">Pinterest</a>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+  </section>
+
+  <!-- Dla Właściciela -->
+  <section id="właściciel" class="bg-white py-12 border-t-4 border-black">
+    <h2 class="text-4xl font-bold text-center mb-8">Dla Właściciela</h2>
+    <div class="max-w-2xl mx-auto px-4">
+      <p class="text-center">Tajna sekcja dostępna tylko dla właściciela strony.</p>
+    </div>
+  </section>
+
+  <script>
+    // Gallery slider functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const slides = document.querySelectorAll('.gallery-slide');
+      const indicators = document.querySelectorAll('.gallery-indicator');
+      const prevBtn = document.querySelector('.gallery-nav.prev');
+      const nextBtn = document.querySelector('.gallery-nav.next');
+      let currentSlide = 0;
+      let slideInterval;
+      const slideDuration = 3000; // Stały czas przełączania - 3 sekundy
       
-      <!-- Blog Card 1 -->
-      <div class="border-4 border-black shadow-lg shadow-black">
-        <div class="bg-gray-300 flex items-center justify-center h-48">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Old_macintosh_icon.svg/1024px-Old_macintosh_icon.svg.png" 
-               alt="Old Blog" 
-               class="h-20" />
-        </div>
-        <div class="p-4">
-          <h3 class="text-lg font-bold">2020-04-07-blog.pdf</h3>
-        </div>
-      </div>
-
-      <!-- Blog Card 2 -->
-      <div class="border-4 border-black shadow-lg shadow-black">
-        <div class="bg-gray-300 flex items-center justify-center h-48">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Windows3.1_Folder_Icon.svg/1024px-Windows3.1_Folder_Icon.svg.png" 
-               alt="Retro Blog" 
-               class="h-20" />
-        </div>
-        <div class="p-4">
-          <h3 class="text-lg font-bold">2020-04-06-blog.pdf</h3>
-        </div>
-      </div>
-
-      <!-- Blog Card 3 -->
-      <div class="border-4 border-black shadow-lg shadow-black">
-        <div class="bg-gray-300 flex items-center justify-center h-48">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Windows_3.1x_Media_Player_icon.svg/1024px-Windows_3.1x_Media_Player_icon.svg.png" 
-               alt="Vintage Blog" 
-               class="h-20" />
-        </div>
-        <div class="p-4">
-          <h3 class="text-lg font-bold">2020-04-06-blog.pdf</h3>
-        </div>
-      </div>
-
-    </div>
-  </section>
+      function showSlide(index) {
+        // Hide all slides
+        slides.forEach(slide => {
+          slide.classList.remove('active');
+          slide.style.opacity = '0';
+        });
+        
+        indicators.forEach(indicator => indicator.classList.remove('active'));
+        
+        // Show current slide with fade effect
+        setTimeout(() => {
+          slides[index].classList.add('active');
+          slides[index].style.opacity = '1';
+        }, 10);
+        
+        indicators[index].classList.add('active');
+        currentSlide = index;
+      }
+      
+      function nextSlide() {
+        let newIndex = (currentSlide + 1) % slides.length;
+        showSlide(newIndex);
+      }
+      
+      function prevSlide() {
+        let newIndex = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(newIndex);
+      }
+      
+      function startSlideShow() {
+        slideInterval = setInterval(nextSlide, slideDuration);
+      }
+      
+      function stopSlideShow() {
+        clearInterval(slideInterval);
+      }
+      
+      // Event listeners
+      prevBtn.addEventListener('click', function() {
+        stopSlideShow();
+        prevSlide();
+        startSlideShow();
+      });
+      
+      nextBtn.addEventListener('click', function() {
+        stopSlideShow();
+        nextSlide();
+        startSlideShow();
+      });
+      
+      indicators.forEach(indicator => {
+        indicator.addEventListener('click', function() {
+          stopSlideShow();
+          showSlide(parseInt(this.dataset.slide));
+          startSlideShow();
+        });
+      });
+      
+      // Initialize
+      showSlide(currentSlide);
+      startSlideShow();
+      
+      // Pause on hover
+      const gallery = document.querySelector('.gallery-container');
+      gallery.addEventListener('mouseenter', stopSlideShow);
+      gallery.addEventListener('mouseleave', startSlideShow);
+    });
+  </script>
 
 </body>
 </html>
