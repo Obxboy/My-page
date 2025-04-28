@@ -1,61 +1,155 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moje Kontakty</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mac Retro Landing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    /* Retro "pixel-art" style */
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .block {
-      background: white;
-      width: 300px;
-      padding: 20px;
-      margin: 10px 0;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.3s;
-    }
-    .block:hover {
-      transform: scale(1.05);
-    }
-    a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      font-size: 1.2em;
+      image-rendering: pixelated;
     }
   </style>
 </head>
-<body>
+<body class="bg-white text-black font-sans">
 
-  <div class="block">
-    <a href="https://www.instagram.com/obx_boy" target="_blank">Mój Instagram</a>
-  </div>
+  <!-- Header -->
+  <header class="bg-gray-200 border-b-4 border-black py-4">
+    <nav class="flex flex-wrap justify-around items-center">
+      <div class="w-8 h-8 bg-black"></div>
+      <a href="#" class="text-black hover:underline">Projects</a>
+      <a href="#" class="text-black hover:underline">Blog</a>
+      <a href="#" class="text-black hover:underline">Learn</a>
+      <a href="#" class="text-black hover:underline">Clone me</a>
+      <a href="#" class="text-black hover:underline">Find me</a>
+    </nav>
+  </header>
 
-  <div class="block">
-    <a href="https://pin.it/6ZUsHUPj8" target="_blank">Mój Pinterest</a>
-  </div>
+  <!-- Hero Section -->
+  <section class="py-12 text-center border-b-4 border-black">
+    <h1 class="text-5xl font-bold mb-4">Hello.<br>I'm Mac.</h1>
+    <p class="text-lg mb-8">
+      I'm a free retro Webflow template made by 
+      <span class="underline">Mackenzie Child</span>.
+    </p>
+    <button class="border-2 border-black py-2 px-6 hover:bg-gray-100 mb-6">
+      Clone me on Webflow
+    </button>
+    <div class="flex justify-center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Old_computer_icon.png" 
+           alt="Retro Mac" 
+           class="w-48 h-48 object-contain" />
+    </div>
+  </section>
 
-  <div class="block">
-    <a href="https://t.me/G_O_L_U_B_E_C" target="_blank">Mój Telegram</a>
-  </div>
+  <!-- Quick Links -->
+  <section class="bg-gray-100 py-8 border-b-4 border-black">
+    <h2 class="text-2xl font-bold text-left px-8 mb-4 flex items-center gap-2">
+      <span class="w-4 h-4 bg-black rounded-full"></span> Quick links
+    </h2>
+    <div class="flex flex-wrap justify-center gap-4 px-4">
+      <a href="#" class="flex items-center border-2 border-black px-4 py-2 hover:bg-gray-200">
+        Blog <span class="ml-2">→</span>
+      </a>
+      <a href="#" class="flex items-center border-2 border-black px-4 py-2 hover:bg-gray-200">
+        Projects <span class="ml-2">→</span>
+      </a>
+      <a href="#" class="flex items-center border-2 border-black px-4 py-2 hover:bg-gray-200">
+        About <span class="ml-2">→</span>
+      </a>
+      <a href="#" class="flex items-center border-2 border-black px-4 py-2 hover:bg-gray-200">
+        Contact <span class="ml-2">→</span>
+      </a>
+    </div>
+  </section>
 
-  <div class="block">
-    <a href="https://wa.me/380985897734" target="_blank">Mój WhatsApp</a>
-  </div>
+  <!-- Projects -->
+  <section class="bg-white py-12 border-b-4 border-black">
+    <h2 class="text-4xl font-bold text-center mb-8">Projects</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto px-4">
+      
+      <!-- Project Card 1 -->
+      <div class="border-4 border-black shadow-lg shadow-black">
+        <div class="bg-gray-300 flex items-center justify-center h-48">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Windows_3.1x_My_Computer_icon.svg/1024px-Windows_3.1x_My_Computer_icon.svg.png" 
+               alt="Old Project" 
+               class="h-20" />
+        </div>
+        <div class="p-4">
+          <h3 class="text-xl font-bold mb-2">Possimus</h3>
+          <p class="text-gray-800 mb-4">Officia sit numquam fugiat sint molestiae id. Est modi est at debitis dolorem.</p>
+          <button class="border-2 border-black py-2 px-4 hover:bg-gray-100">
+            View project
+          </button>
+        </div>
+      </div>
 
-  <div class="block">
-    <a href="https://www.facebook.com/profile.php?id=100078886780691&sk=map&locale=pl_PL" target="_blank">Mój Facebook</a>
-  </div>
+      <!-- Project Card 2 -->
+      <div class="border-4 border-black shadow-lg shadow-black">
+        <div class="bg-gray-300 flex items-center justify-center h-48">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Windows_3.1x_Program_Manager_icon.svg/1024px-Windows_3.1x_Program_Manager_icon.svg.png" 
+               alt="Retro Project" 
+               class="h-20" />
+        </div>
+        <div class="p-4">
+          <h3 class="text-xl font-bold mb-2">Dolorum Ullam Totam</h3>
+          <p class="text-gray-800 mb-4">Consequatur consequatur et quisquam sit velit. Distinctio sint omnis.</p>
+          <button class="border-2 border-black py-2 px-4 hover:bg-gray-100">
+            View project
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Blog Section -->
+  <section class="bg-gray-100 py-12">
+    <div class="flex justify-between items-center max-w-6xl mx-auto mb-8 px-4">
+      <h2 class="text-4xl font-bold">From the blog</h2>
+      <a href="#" class="underline text-black">View all blog posts</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+      
+      <!-- Blog Card 1 -->
+      <div class="border-4 border-black shadow-lg shadow-black">
+        <div class="bg-gray-300 flex items-center justify-center h-48">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Old_macintosh_icon.svg/1024px-Old_macintosh_icon.svg.png" 
+               alt="Old Blog" 
+               class="h-20" />
+        </div>
+        <div class="p-4">
+          <h3 class="text-lg font-bold">2020-04-07-blog.pdf</h3>
+        </div>
+      </div>
+
+      <!-- Blog Card 2 -->
+      <div class="border-4 border-black shadow-lg shadow-black">
+        <div class="bg-gray-300 flex items-center justify-center h-48">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Windows3.1_Folder_Icon.svg/1024px-Windows3.1_Folder_Icon.svg.png" 
+               alt="Retro Blog" 
+               class="h-20" />
+        </div>
+        <div class="p-4">
+          <h3 class="text-lg font-bold">2020-04-06-blog.pdf</h3>
+        </div>
+      </div>
+
+      <!-- Blog Card 3 -->
+      <div class="border-4 border-black shadow-lg shadow-black">
+        <div class="bg-gray-300 flex items-center justify-center h-48">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Windows_3.1x_Media_Player_icon.svg/1024px-Windows_3.1x_Media_Player_icon.svg.png" 
+               alt="Vintage Blog" 
+               class="h-20" />
+        </div>
+        <div class="p-4">
+          <h3 class="text-lg font-bold">2020-04-06-blog.pdf</h3>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
 </body>
 </html>
