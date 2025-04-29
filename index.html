@@ -19,6 +19,7 @@
       display: none;
       justify-content: center;
       gap: 1rem;
+      flex-wrap: wrap;
     }
     .gallery-slide.active {
       display: flex;
@@ -59,59 +60,561 @@
     .transition-all {
       transition: all 0.5s ease;
     }
+    .language-selector {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      background: white;
+      border: 2px solid black;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .language-dropdown {
+      position: absolute;
+      bottom: 60px;
+      right: 0;
+      background: white;
+      border: 2px solid black;
+      border-radius: 8px;
+      padding: 10px;
+      display: none;
+      min-width: 120px;
+    }
+    .language-dropdown.show {
+      display: block;
+    }
+    .language-option {
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .language-option:hover {
+      background: #f0f0f0;
+    }
+    .decorative-dot {
+      width: 8px;
+      height: 8px;
+      background: black;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 5px;
+    }
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .divider-line {
+      flex-grow: 1;
+      height: 2px;
+      background: black;
+    }
+    .divider-icon {
+      margin: 0 15px;
+      font-size: 1.5rem;
+    }
+    .project-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #4a5568;
+    }
+    .social-icon {
+      font-size: 1.5rem;
+      margin-right: 10px;
+      color: #2d3748;
+    }
+    .admin-panel {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    .edit-mode {
+      outline: 2px dashed rgba(0,0,0,0.3);
+      min-height: 20px;
+      padding: 5px;
+    }
+    .image-upload-container {
+      border: 2px dashed #ccc;
+      padding: 20px;
+      text-align: center;
+      margin: 10px 0;
+    }
+    .image-preview {
+      max-width: 200px;
+      max-height: 200px;
+      margin: 10px;
+    }
+    .settings-tab {
+      display: none;
+    }
+    .settings-tab.active {
+      display: block;
+    }
+    .sortable-ghost {
+      opacity: 0.5;
+      background: #c8ebfb;
+    }
+    .block-controls {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      display: flex;
+      gap: 5px;
+      z-index: 10;
+    }
+    .block-control-btn {
+      background: white;
+      border: 1px solid black;
+      border-radius: 4px;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .block-control-btn:hover {
+      background: #f0f0f0;
+    }
+    .admin-section {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 5px;
+    }
+    .admin-section h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+    .block-preview {
+      border: 1px dashed #ccc;
+      padding: 10px;
+      margin: 10px 0;
+      background: #f9f9f9;
+    }
+    .block-type-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .block-type {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .block-type:hover {
+      background: #f0f0f0;
+    }
+    .admin-tabs {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 20px;
+    }
+    .admin-tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+    }
+    .admin-tab.active {
+      border-bottom: 3px solid #4a5568;
+      font-weight: bold;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .gallery-nav {
+        padding: 0.5rem;
+      }
+      .gallery-slide img {
+        width: 100%;
+        max-width: 300px;
+      }
+      nav {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .block-type-selector {
+        grid-template-columns: 1fr;
+      }
+      .admin-tabs {
+        flex-direction: column;
+      }
+      .admin-tab {
+        border-bottom: none;
+        border-left: 3px solid transparent;
+      }
+      .admin-tab.active {
+        border-bottom: none;
+        border-left: 3px solid #4a5568;
+      }
+    }
   </style>
 </head>
 <body class="bg-white text-black font-sans">
 
+  <!-- Admin Panel -->
+  <div class="admin-panel" id="adminPanel">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-3xl font-bold">Panel Administracyjny</h2>
+        <button id="closeAdminPanel" class="bg-red-500 text-white px-4 py-2 rounded">
+          <i class="fas fa-times mr-1"></i> Zamknij
+        </button>
+      </div>
+      
+      <div class="admin-tabs">
+        <div class="admin-tab active" data-tab="content">Zawartość</div>
+        <div class="admin-tab" data-tab="design">Wygląd</div>
+        <div class="admin-tab" data-tab="settings">Ustawienia</div>
+      </div>
+      
+      <!-- Content Tab -->
+      <div class="tab-content active" id="content-tab">
+        <div class="admin-section">
+          <h3 class="text-xl">Zarządzanie zawartością</h3>
+          <div class="block-type-selector">
+            <div class="block-type" data-type="text">
+              <i class="fas fa-paragraph text-2xl mb-2"></i>
+              <div>Blok tekstowy</div>
+            </div>
+            <div class="block-type" data-type="image">
+              <i class="fas fa-image text-2xl mb-2"></i>
+              <div>Blok obrazu</div>
+            </div>
+            <div class="block-type" data-type="gallery">
+              <i class="fas fa-images text-2xl mb-2"></i>
+              <div>Galeria</div>
+            </div>
+            <div class="block-type" data-type="project">
+              <i class="fas fa-project-diagram text-2xl mb-2"></i>
+              <div>Projekt</div>
+            </div>
+            <div class="block-type" data-type="contact">
+              <i class="fas fa-envelope text-2xl mb-2"></i>
+              <div>Kontakt</div>
+            </div>
+            <div class="block-type" data-type="divider">
+              <i class="fas fa-minus text-2xl mb-2"></i>
+              <div>Separator</div>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <label class="block mb-2 font-medium">Dodaj do sekcji:</label>
+            <select id="addToSection" class="border border-gray-300 rounded p-2 w-full">
+              <option value="header">Nagłówek</option>
+              <option value="hero">Sekcja główna</option>
+              <option value="blog">Blog</option>
+              <option value="galeria">Galeria</option>
+              <option value="projekty">Projekty</option>
+              <option value="kontakt">Kontakt</option>
+            </select>
+          </div>
+          
+          <div class="flex gap-2">
+            <button id="addBlockBtn" class="bg-green-500 text-white px-4 py-2 rounded">
+              <i class="fas fa-plus mr-1"></i> Dodaj blok
+            </button>
+            <button id="toggleEditMode" class="bg-blue-500 text-white px-4 py-2 rounded">
+              <i class="fas fa-edit mr-1"></i> Tryb edycji
+            </button>
+            <button id="saveChanges" class="bg-purple-500 text-white px-4 py-2 rounded">
+              <i class="fas fa-save mr-1"></i> Zapisz zmiany
+            </button>
+          </div>
+        </div>
+        
+        <div class="admin-section">
+          <h3 class="text-xl">Podgląd strony</h3>
+          <div class="border p-4 rounded">
+            <p class="text-gray-600 mb-4">Kliknij na elementy strony, aby je edytować. Użyj przycisku "Tryb edycji" powyżej, aby włączyć/wyłączyć edycję.</p>
+            <p class="text-gray-600">Przeciągnij elementy, aby zmienić ich kolejność.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Design Tab -->
+      <div class="tab-content" id="design-tab">
+        <div class="admin-section">
+          <h3 class="text-xl">Motyw kolorystyczny</h3>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+            <div class="theme-option border p-4 rounded cursor-pointer" data-theme="default">
+              <div class="flex items-center">
+                <div class="w-8 h-8 bg-black rounded-full mr-2"></div>
+                <div class="w-8 h-8 bg-gray-200 rounded-full mr-2"></div>
+                <div class="w-8 h-8 bg-white rounded-full border border-gray-300"></div>
+              </div>
+              <p class="mt-2 text-center">Domyślny</p>
+            </div>
+            <div class="theme-option border p-4 rounded cursor-pointer" data-theme="dark">
+              <div class="flex items-center">
+                <div class="w-8 h-8 bg-gray-900 rounded-full mr-2"></div>
+                <div class="w-8 h-8 bg-gray-700 rounded-full mr-2"></div>
+                <div class="w-8 h-8 bg-gray-800 rounded-full"></div>
+              </div>
+              <p class="mt-2 text-center">Ciemny</p>
+            </div>
+            <div class="theme-option border p-4 rounded cursor-pointer" data-theme="light">
+              <div class="flex items-center">
+                <div class="w-8 h-8 bg-white rounded-full border border-gray-300 mr-2"></div>
+                <div class="w-8 h-8 bg-gray-100 rounded-full mr-2"></div>
+                <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
+              </div>
+              <p class="mt-2 text-center">Jasny</p>
+            </div>
+            <div class="theme-option border p-4 rounded cursor-pointer" data-theme="blue">
+              <div class="flex items-center">
+                <div class="w-8 h-8 bg-blue-500 rounded-full mr-2"></div>
+                <div class="w-8 h-8 bg-blue-100 rounded-full mr-2"></div>
+                <div class="w-8 h-8 bg-blue-50 rounded-full"></div>
+              </div>
+              <p class="mt-2 text-center">Niebieski</p>
+            </div>
+            <div class="theme-option border p-4 rounded cursor-pointer" data-theme="green">
+              <div class="flex items-center">
+                <div class="w-8 h-8 bg-green-600 rounded-full mr-2"></div>
+                <div class="w-8 h-8 bg-green-100 rounded-full mr-2"></div>
+                <div class="w-8 h-8 bg-green-50 rounded-full"></div>
+              </div>
+              <p class="mt-2 text-center">Zielony</p>
+            </div>
+            <div class="theme-option border p-4 rounded cursor-pointer" data-theme="custom">
+              <div class="flex items-center">
+                <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mr-2"></div>
+                <div class="w-8 h-8 bg-purple-100 rounded-full mr-2"></div>
+                <div class="w-8 h-8 bg-pink-50 rounded-full"></div>
+              </div>
+              <p class="mt-2 text-center">Niestandardowy</p>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <label class="block mb-2 font-medium">Kolor główny:</label>
+            <input type="color" id="primaryColor" class="w-full h-12" value="#000000">
+          </div>
+          
+          <div class="mb-4">
+            <label class="block mb-2 font-medium">Kolor tła:</label>
+            <input type="color" id="backgroundColor" class="w-full h-12" value="#ffffff">
+          </div>
+          
+          <div class="mb-4">
+            <label class="block mb-2 font-medium">Kolor tekstu:</label>
+            <input type="color" id="textColor" class="w-full h-12" value="#000000">
+          </div>
+        </div>
+        
+        <div class="admin-section">
+          <h3 class="text-xl">Czcionka</h3>
+          <div class="mb-4">
+            <label class="block mb-2 font-medium">Rodzina czcionek:</label>
+            <select id="fontFamily" class="border border-gray-300 rounded p-2 w-full">
+              <option value="sans">Sans-serif</option>
+              <option value="serif">Serif</option>
+              <option value="mono">Monospace</option>
+            </select>
+          </div>
+          
+          <div class="mb-4">
+            <label class="block mb-2 font-medium">Rozmiar czcionki:</label>
+            <select id="fontSize" class="border border-gray-300 rounded p-2 w-full">
+              <option value="sm">Mały</option>
+              <option value="base" selected>Średni</option>
+              <option value="lg">Duży</option>
+            </select>
+          </div>
+        </div>
+        
+        <button id="applyDesign" class="bg-blue-500 text-white px-4 py-2 rounded">
+          <i class="fas fa-check mr-1"></i> Zastosuj zmiany
+        </button>
+      </div>
+      
+      <!-- Settings Tab -->
+      <div class="tab-content" id="settings-tab">
+        <div class="admin-section">
+          <h3 class="text-xl">Ustawienia strony</h3>
+          <div class="mb-4">
+            <label class="block mb-2 font-medium">Tytuł strony:</label>
+            <input type="text" id="siteTitle" class="border border-gray-300 rounded p-2 w-full" value="Blog obx_boy">
+          </div>
+          
+          <div class="mb-4">
+            <label class="block mb-2 font-medium">Logo:</label>
+            <div class="image-upload-container">
+              <p>Kliknij, aby przesłać logo</p>
+              <input type="file" id="logoUpload" accept="image/*" class="hidden">
+              <div class="image-preview-container mt-2"></div>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <label class="block mb-2 font-medium">Favicon:</label>
+            <div class="image-upload-container">
+              <p>Kliknij, aby przesłać favicon</p>
+              <input type="file" id="faviconUpload" accept="image/*" class="hidden">
+              <div class="image-preview-container mt-2"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="admin-section">
+          <h3 class="text-xl">Eksport/Import</h3>
+          <div class="mb-4">
+            <button id="exportContent" class="bg-yellow-500 text-white px-4 py-2 rounded mr-2">
+              <i class="fas fa-file-export mr-1"></i> Eksportuj zawartość
+            </button>
+            <button id="importContent" class="bg-purple-500 text-white px-4 py-2 rounded">
+              <i class="fas fa-file-import mr-1"></i> Importuj zawartość
+            </button>
+            <input type="file" id="importFile" class="hidden" accept=".json">
+          </div>
+          <div id="exportData" class="hidden">
+            <label class="block mb-2 font-medium">Dane eksportu:</label>
+            <textarea id="exportContentData" class="border border-gray-300 rounded p-2 w-full h-32"></textarea>
+            <button id="copyExport" class="bg-gray-200 px-4 py-2 rounded mt-2">
+              <i class="fas fa-copy mr-1"></i> Kopiuj do schowka
+            </button>
+          </div>
+        </div>
+        
+        <button id="saveSettings" class="bg-green-500 text-white px-4 py-2 rounded">
+          <i class="fas fa-save mr-1"></i> Zapisz ustawienia
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Header -->
-  <header class="bg-gray-200 border-b-4 border-black py-4">
-    <nav class="flex flex-wrap justify-around items-center">
-      <div class="w-8 h-8 bg-black"></div>
-      <a href="#blog" class="text-black hover:underline">Blog</a>
-      <a href="#galeria" class="text-black hover:underline">Galeria</a>
-      <a href="#projekty" class="text-black hover:underline">Projekty</a>
-      <a href="#kontakt" class="text-black hover:underline">Kontakt</a>
-      <a href="#właściciel" class="text-black hover:underline">Dla Właściciela</a>
+  <header class="bg-gray-200 border-b-4 border-black py-4 px-2" id="header">
+    <nav class="flex flex-wrap justify-around items-center gap-2">
+      <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+        <i class="fas fa-code text-white text-sm"></i>
+      </div>
+      <a href="#blog" class="text-black hover:underline flex items-center" data-i18n="menu.blog">
+        <i class="fas fa-pen-fancy mr-2"></i>Blog
+      </a>
+      <a href="#galeria" class="text-black hover:underline flex items-center" data-i18n="menu.gallery">
+        <i class="fas fa-images mr-2"></i>Galeria
+      </a>
+      <a href="#projekty" class="text-black hover:underline flex items-center" data-i18n="menu.projects">
+        <i class="fas fa-project-diagram mr-2"></i>Projekty
+      </a>
+      <a href="#kontakt" class="text-black hover:underline flex items-center" data-i18n="menu.contact">
+        <i class="fas fa-envelope mr-2"></i>Kontakt
+      </a>
+      <a href="#" id="adminLink" class="text-black hover:underline flex items-center">
+        <i class="fas fa-user-shield mr-2"></i>Właściciel
+      </a>
     </nav>
   </header>
 
   <!-- Hero Section -->
-  <section class="py-12 text-center border-b-4 border-black">
-    <h1 class="text-5xl font-bold mb-4">Witaj!<br>Jestem obx_boy</h1>
-    <p class="text-lg mb-8">
+  <section class="py-12 text-center border-b-4 border-black px-4 relative" id="hero">
+    <div class="absolute top-4 left-4">
+      <span class="decorative-dot"></span>
+      <span class="decorative-dot"></span>
+      <span class="decorative-dot"></span>
+    </div>
+    <div class="absolute top-4 right-4">
+      <span class="decorative-dot"></span>
+      <span class="decorative-dot"></span>
+      <span class="decorative-dot"></span>
+    </div>
+    <h1 class="text-5xl font-bold mb-4" data-i18n="hero.title">Witaj!<br>Jestem obx_boy</h1>
+    <p class="text-lg mb-8" data-i18n="hero.subtitle">
       To mój osobisty blog — moje myśli, publikacje i projekty.
     </p>
   </section>
 
   <!-- Blog Section -->
-  <section id="blog" class="bg-gray-100 py-12 border-b-4 border-black">
-    <h2 class="text-4xl font-bold text-center mb-8">Mój Blog</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+  <section id="blog" class="bg-gray-100 py-12 border-b-4 border-black px-4">
+    <div class="section-divider">
+      <div class="divider-line"></div>
+      <div class="divider-icon">
+        <i class="fas fa-book-open"></i>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+    <h2 class="text-4xl font-bold text-center mb-8" data-i18n="blog.title">Mój Blog</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
 
       <!-- Blog Card 1 -->
-      <div class="border-4 border-black shadow-lg shadow-black p-4">
-        <h3 class="text-lg font-bold mb-2">Pierwszy wpis</h3>
-        <p>Moje przemyślenia na początek blogowania.</p>
+      <div class="border-4 border-black shadow-lg shadow-black p-4 hover:transform hover:scale-105 transition-transform">
+        <div class="text-center mb-4">
+          <i class="fas fa-feather-alt text-3xl"></i>
+        </div>
+        <h3 class="text-lg font-bold mb-2" data-i18n="blog.post1.title">Pierwszy wpis</h3>
+        <p data-i18n="blog.post1.content">Moje przemyślenia na początek blogowania.</p>
+        <div class="mt-4 text-right">
+          <i class="fas fa-arrow-right"></i>
+        </div>
       </div>
 
       <!-- Blog Card 2 -->
-      <div class="border-4 border-black shadow-lg shadow-black p-4">
-        <h3 class="text-lg font-bold mb-2">Publikacje</h3>
-        <p>Lista moich artykułów i projektów.</p>
+      <div class="border-4 border-black shadow-lg shadow-black p-4 hover:transform hover:scale-105 transition-transform">
+        <div class="text-center mb-4">
+          <i class="fas fa-newspaper text-3xl"></i>
+        </div>
+        <h3 class="text-lg font-bold mb-2" data-i18n="blog.post2.title">Publikacje</h3>
+        <p data-i18n="blog.post2.content">Lista moich artykułów и проектов.</p>
+        <div class="mt-4 text-right">
+          <i class="fas fa-arrow-right"></i>
+        </div>
       </div>
 
       <!-- Blog Card 3 -->
-      <div class="border-4 border-black shadow-lg shadow-black p-4">
-        <h3 class="text-lg font-bold mb-2">Inspiracje</h3>
-        <p>Co mnie motywuje do działania każdego dnia.</p>
+      <div class="border-4 border-black shadow-lg shadow-black p-4 hover:transform hover:scale-105 transition-transform">
+        <div class="text-center mb-4">
+          <i class="fas fa-lightbulb text-3xl"></i>
+        </div>
+        <h3 class="text-lg font-bold mb-2" data-i18n="blog.post3.title">Inspiracje</h3>
+        <p data-i18n="blog.post3.content">Co mnie motywuje do działania każdego dnia.</p>
+        <div class="mt-4 text-right">
+          <i class="fas fa-arrow-right"></i>
+        </div>
       </div>
 
     </div>
   </section>
 
   <!-- Galeria -->
-  <section id="galeria" class="bg-white py-12 border-b-4 border-black">
-    <h2 class="text-4xl font-bold text-center mb-8">Galeria</h2>
+  <section id="galeria" class="bg-white py-12 border-b-4 border-black px-4">
+    <div class="section-divider">
+      <div class="divider-line"></div>
+      <div class="divider-icon">
+        <i class="fas fa-camera-retro"></i>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+    <h2 class="text-4xl font-bold text-center mb-8" data-i18n="gallery.title">Galeria</h2>
     <div class="gallery-container">
       <button class="gallery-nav prev"><i class="fas fa-chevron-left"></i></button>
       
@@ -151,33 +654,52 @@
   </section>
 
   <!-- Projekty -->
-  <section id="projekty" class="bg-white py-12 border-b-4 border-black">
-    <h2 class="text-4xl font-bold text-center mb-8">Moje Projekty</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto px-4">
+  <section id="projekty" class="bg-white py-12 border-b-4 border-black px-4">
+    <div class="section-divider">
+      <div class="divider-line"></div>
+      <div class="divider-icon">
+        <i class="fas fa-laptop-code"></i>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+    <h2 class="text-4xl font-bold text-center mb-8" data-i18n="projects.title">Moje Projekty</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
 
       <!-- Project Card 1 -->
-      <div class="border-4 border-black shadow-lg shadow-black">
+      <div class="border-4 border-black shadow-lg shadow-black hover:transform hover:scale-105 transition-transform">
         <div class="bg-gray-300 flex items-center justify-center h-48">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Windows_3.1x_My_Computer_icon.svg/1024px-Windows_3.1x_My_Computer_icon.svg.png" 
-               alt="Projekt" 
-               class="h-20" />
+          <div class="text-center">
+            <i class="fas fa-code project-icon"></i>
+            <div class="text-4xl font-bold">1</div>
+          </div>
         </div>
         <div class="p-4">
-          <h3 class="text-xl font-bold mb-2">Projekt 1</h3>
-          <p class="text-gray-800 mb-4">Opis mojego pierwszego projektu.</p>
+          <h3 class="text-xl font-bold mb-2" data-i18n="projects.project1.title">Projekt 1</h3>
+          <p class="text-gray-800 mb-4" data-i18n="projects.project1.description">Opis mojego pierwszego projektu.</p>
+          <div class="flex gap-2">
+            <span class="px-2 py-1 bg-gray-200 rounded text-sm">HTML</span>
+            <span class="px-2 py-1 bg-gray-200 rounded text-sm">CSS</span>
+            <span class="px-2 py-1 bg-gray-200 rounded text-sm">JS</span>
+          </div>
         </div>
       </div>
 
       <!-- Project Card 2 -->
-      <div class="border-4 border-black shadow-lg shadow-black">
+      <div class="border-4 border-black shadow-lg shadow-black hover:transform hover:scale-105 transition-transform">
         <div class="bg-gray-300 flex items-center justify-center h-48">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Windows_3.1x_Program_Manager_icon.svg/1024px-Windows_3.1x_Program_Manager_icon.svg.png" 
-               alt="Projekt Retro" 
-               class="h-20" />
+          <div class="text-center">
+            <i class="fas fa-code project-icon"></i>
+            <div class="text-4xl font-bold">2</div>
+          </div>
         </div>
         <div class="p-4">
-          <h3 class="text-xl font-bold mb-2">Projekt 2</h3>
-          <p class="text-gray-800 mb-4">Opis drugiego projektu nad którym pracowałem.</p>
+          <h3 class="text-xl font-bold mb-2" data-i18n="projects.project2.title">Projekt 2</h3>
+          <p class="text-gray-800 mb-4" data-i18n="projects.project2.description">Opis drugiego projektu.</p>
+          <div class="flex gap-2">
+            <span class="px-2 py-1 bg-gray-200 rounded text-sm">HTML</span>
+            <span class="px-2 py-1 bg-gray-200 rounded text-sm">CSS</span>
+            <span class="px-2 py-1 bg-gray-200 rounded text-sm">JS</span>
+          </div>
         </div>
       </div>
 
@@ -185,23 +707,45 @@
   </section>
 
   <!-- Kontakt -->
-  <section id="kontakt" class="bg-gray-100 py-12">
-    <h2 class="text-4xl font-bold text-center mb-8">Kontakt</h2>
+  <section id="kontakt" class="bg-gray-100 py-12 px-4">
+    <div class="section-divider">
+      <div class="divider-line"></div>
+      <div class="divider-icon">
+        <i class="fas fa-paper-plane"></i>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+    <h2 class="text-4xl font-bold text-center mb-8" data-i18n="contact.title">Kontakt</h2>
     <div class="flex flex-col items-center gap-4 text-center">
-      <a href="https://t.me/G_O_L_U_B_E_C" target="_blank" class="text-black hover:underline">Telegram</a>
-      <a href="https://www.instagram.com/obx_boy" target="_blank" class="text-black hover:underline">Instagram</a>
-      <a href="https://pin.it/6ZUsHUPj8" target="_blank" class="text-black hover:underline">Pinterest</a>
+      <a href="https://t.me/G_O_L_U_B_E_C" target="_blank" class="text-black hover:underline flex items-center">
+        <i class="fab fa-telegram social-icon"></i>Telegram
+      </a>
+      <a href="https://www.instagram.com/obx_boy" target="_blank" class="text-black hover:underline flex items-center">
+        <i class="fab fa-instagram social-icon"></i>Instagram
+      </a>
+      <a href="https://pin.it/6ZUsHUPj8" target="_blank" class="text-black hover:underline flex items-center">
+        <i class="fab fa-pinterest social-icon"></i>Pinterest
+      </a>
     </div>
   </section>
 
-  <!-- Dla Właściciela -->
-  <section id="właściciel" class="bg-white py-12 border-t-4 border-black">
-    <h2 class="text-4xl font-bold text-center mb-8">Dla Właściciela</h2>
-    <div class="max-w-2xl mx-auto px-4">
-      <p class="text-center">Tajna sekcja dostępna tylko dla właściciela strony.</p>
+  <!-- Language Selector -->
+  <div class="language-selector" id="languageSelector">
+    <i class="fas fa-globe"></i>
+    <div class="language-dropdown" id="languageDropdown">
+      <div class="language-option" data-lang="pl">
+        <i class="fas fa-flag mr-2"></i>Polski
+      </div>
+      <div class="language-option" data-lang="en">
+        <i class="fas fa-flag-usa mr-2"></i>English
+      </div>
+      <div class="language-option" data-lang="uk">
+        <i class="fas fa-flag mr-2"></i>Українська
+      </div>
     </div>
-  </section>
+  </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
   <script>
     // Gallery slider functionality
     document.addEventListener('DOMContentLoaded', function() {
@@ -210,8 +754,6 @@
       const prevBtn = document.querySelector('.gallery-nav.prev');
       const nextBtn = document.querySelector('.gallery-nav.next');
       let currentSlide = 0;
-      let slideInterval;
-      const slideDuration = 3000; // Stały czas przełączania - 3 sekundy
       
       function showSlide(index) {
         // Hide all slides
@@ -242,45 +784,519 @@
         showSlide(newIndex);
       }
       
-      function startSlideShow() {
-        slideInterval = setInterval(nextSlide, slideDuration);
-      }
-      
-      function stopSlideShow() {
-        clearInterval(slideInterval);
-      }
-      
       // Event listeners
       prevBtn.addEventListener('click', function() {
-        stopSlideShow();
         prevSlide();
-        startSlideShow();
       });
       
       nextBtn.addEventListener('click', function() {
-        stopSlideShow();
         nextSlide();
-        startSlideShow();
       });
       
       indicators.forEach(indicator => {
         indicator.addEventListener('click', function() {
-          stopSlideShow();
           showSlide(parseInt(this.dataset.slide));
-          startSlideShow();
         });
       });
       
       // Initialize
       showSlide(currentSlide);
-      startSlideShow();
-      
-      // Pause on hover
-      const gallery = document.querySelector('.gallery-container');
-      gallery.addEventListener('mouseenter', stopSlideShow);
-      gallery.addEventListener('mouseleave', startSlideShow);
+
+      // Language selector functionality
+      const languageSelector = document.getElementById('languageSelector');
+      const languageDropdown = document.getElementById('languageDropdown');
+
+      languageSelector.addEventListener('click', function() {
+        languageDropdown.classList.toggle('show');
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!languageSelector.contains(event.target)) {
+          languageDropdown.classList.remove('show');
+        }
+      });
+
+      // Translations
+      const translations = {
+        pl: {
+          "menu.blog": "Blog",
+          "menu.gallery": "Galeria",
+          "menu.projects": "Projekty",
+          "menu.contact": "Kontakt",
+          "menu.owner": "Właściciel",
+          "hero.title": "Witaj!<br>Jestem obx_boy",
+          "hero.subtitle": "To mój osobisty blog — moje myśli, publikacje i projekty.",
+          "blog.title": "Mój Blog",
+          "blog.post1.title": "Pierwszy wpis",
+          "blog.post1.content": "Moje przemyślenia na początek blogowania.",
+          "blog.post2.title": "Publikacje",
+          "blog.post2.content": "Lista moich artykułów i projektów.",
+          "blog.post3.title": "Inspiracje",
+          "blog.post3.content": "Co mnie motywuje do działania każdego dnia.",
+          "gallery.title": "Galeria",
+          "projects.title": "Moje Projekty",
+          "projects.project1.title": "Projekt 1",
+          "projects.project1.description": "Opis mojego pierwszego projektu.",
+          "projects.project2.title": "Projekt 2",
+          "projects.project2.description": "Opis drugiego projektu.",
+          "contact.title": "Kontakt"
+        },
+        en: {
+          "menu.blog": "Blog",
+          "menu.gallery": "Gallery",
+          "menu.projects": "Projects",
+          "menu.contact": "Contact",
+          "menu.owner": "Owner",
+          "hero.title": "Hello!<br>I'm obx_boy",
+          "hero.subtitle": "This is my personal blog — my thoughts, publications and projects.",
+          "blog.title": "My Blog",
+          "blog.post1.title": "First post",
+          "blog.post1.content": "My thoughts at the beginning of blogging.",
+          "blog.post2.title": "Publications",
+          "blog.post2.content": "List of my articles and projects.",
+          "blog.post3.title": "Inspirations",
+          "blog.post3.content": "What motivates me to act every day.",
+          "gallery.title": "Gallery",
+          "projects.title": "My Projects",
+          "projects.project1.title": "Project 1",
+          "projects.project1.description": "Description of my first project.",
+          "projects.project2.title": "Project 2",
+          "projects.project2.description": "Description of the second project.",
+          "contact.title": "Contact"
+        },
+        uk: {
+          "menu.blog": "Блог",
+          "menu.gallery": "Галерея",
+          "menu.projects": "Проекти",
+          "menu.contact": "Контакт",
+          "menu.owner": "Власник",
+          "hero.title": "Привіт!<br>Я obx_boy",
+          "hero.subtitle": "Це мій особистий блог — мої думки, публікації та проекти.",
+          "blog.title": "Мій Блог",
+          "blog.post1.title": "Перший запис",
+          "blog.post1.content": "Мої роздуми на початку ведення блогу.",
+          "blog.post2.title": "Публікації",
+          "blog.post2.content": "Список моїх статей та проектів.",
+          "blog.post3.title": "Натхнення",
+          "blog.post3.content": "Що надихає мене діяти щодня.",
+          "gallery.title": "Галерея",
+          "projects.title": "Мої Проекти",
+          "projects.project1.title": "Проект 1",
+          "projects.project1.description": "Опис мого першого проекту.",
+          "projects.project2.title": "Проект 2",
+          "projects.project2.description": "Опис другого проекту.",
+          "contact.title": "Контакт"
+        }
+      };
+
+      // Language change function
+      function changeLanguage(lang) {
+        document.documentElement.lang = lang;
+        const elements = document.querySelectorAll('[data-i18n]');
+        
+        elements.forEach(element => {
+          const key = element.getAttribute('data-i18n');
+          if (translations[lang] && translations[lang][key]) {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+              element.value = translations[lang][key];
+            } else {
+              element.innerHTML = translations[lang][key];
+            }
+          }
+        });
+        
+        // Close dropdown
+        languageDropdown.classList.remove('show');
+      }
+
+      // Add event listeners to language options
+      document.querySelectorAll('.language-option').forEach(option => {
+        option.addEventListener('click', function() {
+          const lang = this.getAttribute('data-lang');
+          changeLanguage(lang);
+        });
+      });
+
+      // Admin Panel Functionality
+      const adminPanel = document.getElementById('adminPanel');
+      const adminLink = document.getElementById('adminLink');
+      const closeAdminPanel = document.getElementById('closeAdminPanel');
+      const toggleEditMode = document.getElementById('toggleEditMode');
+      const saveChanges = document.getElementById('saveChanges');
+      const addBlockBtn = document.getElementById('addBlockBtn');
+      const blockTypeSelector = document.querySelectorAll('.block-type');
+      const addToSection = document.getElementById('addToSection');
+      const applyDesign = document.getElementById('applyDesign');
+      const exportContent = document.getElementById('exportContent');
+      const importContent = document.getElementById('importContent');
+      const importFile = document.getElementById('importFile');
+      const exportData = document.getElementById('exportData');
+      const exportContentData = document.getElementById('exportContentData');
+      const copyExport = document.getElementById('copyExport');
+      const siteTitle = document.getElementById('siteTitle');
+      const fontFamily = document.getElementById('fontFamily');
+      const adminTabs = document.querySelectorAll('.admin-tab');
+      const tabContents = document.querySelectorAll('.tab-content');
+      const themeOptions = document.querySelectorAll('.theme-option');
+      const primaryColor = document.getElementById('primaryColor');
+      const backgroundColor = document.getElementById('backgroundColor');
+      const textColor = document.getElementById('textColor');
+      const fontSize = document.getElementById('fontSize');
+      const logoUpload = document.getElementById('logoUpload');
+      const faviconUpload = document.getElementById('faviconUpload');
+      const saveSettings = document.getElementById('saveSettings');
+
+      let editMode = false;
+      let selectedBlockType = 'text';
+
+      // Toggle Admin Panel
+      adminLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        adminPanel.style.display = 'block';
+      });
+
+      closeAdminPanel.addEventListener('click', function() {
+        adminPanel.style.display = 'none';
+      });
+
+      // Admin tabs
+      adminTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          const tabId = this.dataset.tab;
+          
+          // Update active tab
+          adminTabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Show corresponding content
+          tabContents.forEach(content => content.classList.remove('active'));
+          document.getElementById(`${tabId}-tab`).classList.add('active');
+        });
+      });
+
+      // Theme selection
+      themeOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          themeOptions.forEach(opt => opt.classList.remove('border-blue-500'));
+          this.classList.add('border-blue-500');
+        });
+      });
+
+      // Toggle Edit Mode
+      toggleEditMode.addEventListener('click', function() {
+        editMode = !editMode;
+        if (editMode) {
+          toggleEditMode.classList.add('bg-green-500');
+          toggleEditMode.classList.remove('bg-blue-500');
+          toggleEditMode.innerHTML = '<i class="fas fa-check mr-1"></i> Wyłącz edycję';
+          enableEditMode();
+        } else {
+          toggleEditMode.classList.remove('bg-green-500');
+          toggleEditMode.classList.add('bg-blue-500');
+          toggleEditMode.innerHTML = '<i class="fas fa-edit mr-1"></i> Tryb edycji';
+          disableEditMode();
+        }
+      });
+
+      function enableEditMode() {
+        // Make all content editable
+        document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, a, li').forEach(el => {
+          el.setAttribute('contenteditable', 'true');
+          el.classList.add('edit-mode');
+        });
+
+        // Add block controls
+        document.querySelectorAll('section, div.border-4').forEach(el => {
+          if (!el.querySelector('.block-controls')) {
+            const controls = document.createElement('div');
+            controls.className = 'block-controls';
+            controls.innerHTML = `
+              <button class="block-control-btn move-block" title="Move"><i class="fas fa-arrows-alt"></i></button>
+              <button class="block-control-btn delete-block" title="Delete"><i class="fas fa-trash"></i></button>
+            `;
+            el.style.position = 'relative';
+            el.appendChild(controls);
+            
+            // Add event listeners to controls
+            controls.querySelector('.delete-block').addEventListener('click', function() {
+              if (confirm('Are you sure you want to delete this block?')) {
+                el.remove();
+              }
+            });
+          }
+        });
+
+        // Initialize Sortable for drag and drop
+        document.querySelectorAll('section').forEach(section => {
+          new Sortable(section, {
+            animation: 150,
+            ghostClass: 'sortable-ghost',
+            handle: '.move-block',
+            onEnd: function() {
+              // Save the new order
+            }
+          });
+        });
+      }
+
+      function disableEditMode() {
+        // Remove editable attributes
+        document.querySelectorAll('[contenteditable]').forEach(el => {
+          el.removeAttribute('contenteditable');
+          el.classList.remove('edit-mode');
+        });
+
+        // Remove block controls
+        document.querySelectorAll('.block-controls').forEach(el => {
+          el.remove();
+        });
+      }
+
+      // Save changes
+      saveChanges.addEventListener('click', function() {
+        // In a real app, you would save to localStorage or a database
+        alert('Changes saved!');
+      });
+
+      // Block type selection
+      blockTypeSelector.forEach(block => {
+        block.addEventListener('click', function() {
+          selectedBlockType = this.dataset.type;
+          blockTypeSelector.forEach(b => b.style.borderColor = '#ddd');
+          this.style.borderColor = '#4a5568';
+        });
+      });
+
+      // Add new block
+      addBlockBtn.addEventListener('click', function() {
+        const sectionId = addToSection.value;
+        const section = document.getElementById(sectionId);
+        
+        if (!section) return;
+        
+        let newBlock;
+        
+        switch(selectedBlockType) {
+          case 'text':
+            newBlock = document.createElement('div');
+            newBlock.className = 'border-4 border-black p-4 mb-4';
+            newBlock.innerHTML = `
+              <h3 class="text-lg font-bold mb-2">New Text Block</h3>
+              <p>Edit this text to add your content.</p>
+            `;
+            break;
+            
+          case 'image':
+            newBlock = document.createElement('div');
+            newBlock.className = 'border-4 border-black p-4 mb-4';
+            newBlock.innerHTML = `
+              <div class="image-upload-container">
+                <p>Click to upload an image</p>
+                <input type="file" accept="image/*" class="hidden">
+                <div class="image-preview-container mt-2"></div>
+              </div>
+            `;
+            break;
+            
+          case 'gallery':
+            newBlock = document.createElement('div');
+            newBlock.className = 'border-4 border-black p-4 mb-4';
+            newBlock.innerHTML = `
+              <h3 class="text-lg font-bold mb-2">Gallery Block</h3>
+              <div class="gallery-container">
+                <div class="gallery-slide">
+                  <img src="https://placehold.co/300x200" class="border-4 border-black">
+                </div>
+                <button class="gallery-nav prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="gallery-nav next"><i class="fas fa-chevron-right"></i></button>
+              </div>
+            `;
+            break;
+            
+          case 'project':
+            newBlock = document.createElement('div');
+            newClass = 'border-4 border-black shadow-lg shadow-black p-4 mb-4';
+            newBlock.innerHTML = `
+              <div class="text-center mb-4">
+                <i class="fas fa-project-diagram text-3xl"></i>
+              </div>
+              <h3 class="text-lg font-bold mb-2">New Project</h3>
+              <p>Describe your project here.</p>
+            `;
+            break;
+            
+          case 'contact':
+            newBlock = document.createElement('div');
+            newBlock.className = 'border-4 border-black p-4 mb-4';
+            newBlock.innerHTML = `
+              <h3 class="text-lg font-bold mb-2">Contact Info</h3>
+              <div class="flex items-center mb-2">
+                <i class="fas fa-envelope mr-2"></i>
+                <span>your@email.com</span>
+              </div>
+            `;
+            break;
+            
+          case 'divider':
+            newBlock = document.createElement('div');
+            newBlock.className = 'section-divider my-8';
+            newBlock.innerHTML = `
+              <div class="divider-line"></div>
+              <div class="divider-icon">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="divider-line"></div>
+            `;
+            break;
+        }
+        
+        if (newBlock) {
+          section.appendChild(newBlock);
+          if (editMode) {
+            enableEditMode();
+          }
+        }
+      });
+
+      // Apply design changes
+      applyDesign.addEventListener('click', function() {
+        // Apply color theme
+        const selectedTheme = document.querySelector('.theme-option.border-blue-500');
+        if (selectedTheme) {
+          const theme = selectedTheme.dataset.theme;
+          
+          switch(theme) {
+            case 'dark':
+              document.body.className = 'bg-gray-900 text-white';
+              break;
+            case 'light':
+              document.body.className = 'bg-white text-black';
+              break;
+            case 'blue':
+              document.body.className = 'bg-blue-50 text-blue-900';
+              break;
+            case 'green':
+              document.body.className = 'bg-green-50 text-green-900';
+              break;
+            case 'custom':
+              // Apply custom colors
+              document.body.style.backgroundColor = backgroundColor.value;
+              document.body.style.color = textColor.value;
+              break;
+            default:
+              document.body.className = 'bg-white text-black';
+          }
+        }
+        
+        // Apply font family
+        document.body.classList.remove('font-sans', 'font-serif', 'font-mono');
+        document.body.classList.add(`font-${fontFamily.value}`);
+        
+        // Apply font size
+        document.body.classList.remove('text-sm', 'text-base', 'text-lg');
+        document.body.classList.add(`text-${fontSize.value}`);
+        
+        alert('Design changes applied!');
+      });
+
+      // Export content
+      exportContent.addEventListener('click', function() {
+        const content = {
+          title: document.title,
+          html: document.body.innerHTML,
+          settings: {
+            colorTheme: colorTheme.value,
+            fontFamily: fontFamily.value
+          }
+        };
+        
+        exportContentData.value = JSON.stringify(content, null, 2);
+        exportData.style.display = 'block';
+      });
+
+      // Copy export data
+      copyExport.addEventListener('click', function() {
+        exportContentData.select();
+        document.execCommand('copy');
+        alert('Copied to clipboard!');
+      });
+
+      // Import content
+      importContent.addEventListener('click', function() {
+        importFile.click();
+      });
+
+      importFile.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          try {
+            const content = JSON.parse(e.target.result);
+            if (content.html) {
+              document.body.innerHTML = content.html;
+              if (content.settings) {
+                fontFamily.value = content.settings.fontFamily || 'sans';
+                siteTitle.value = content.title || 'Blog obx_boy';
+              }
+              alert('Content imported successfully!');
+            }
+          } catch (err) {
+            alert('Error importing content: ' + err.message);
+          }
+        };
+        reader.readAsText(file);
+      });
+
+      // Logo upload
+      logoUpload.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const logoContainer = document.querySelector('.logo-container');
+          if (!logoContainer) {
+            const header = document.querySelector('header nav');
+            const logo = document.createElement('div');
+            logo.className = 'logo-container';
+            logo.innerHTML = `<img src="${e.target.result}" class="h-8">`;
+            header.insertBefore(logo, header.firstChild);
+          } else {
+            logoContainer.innerHTML = `<img src="${e.target.result}" class="h-8">`;
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+
+      // Favicon upload
+      faviconUpload.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const link = document.querySelector("link[rel~='icon']");
+          if (!link) {
+            const newLink = document.createElement('link');
+            newLink.rel = 'icon';
+            newLink.href = e.target.result;
+            document.head.appendChild(newLink);
+          } else {
+            link.href = e.target.result;
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+
+      // Save settings
+      saveSettings.addEventListener('click', function() {
+        document.title = siteTitle.value;
+        alert('Settings saved!');
+      });
     });
   </script>
-
 </body>
 </html>
